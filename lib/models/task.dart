@@ -24,18 +24,18 @@ class TaskModel {
   });
 
   factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
-    docId: json["docID"],
-    title: json["title"],
-    description: json["description"],
-    createdAt: json["createdAt"],
-    isCompleted: json["isCompleted"],
-  );
+        docId: json["docID"],
+        title: json["title"],
+        description: json["description"],
+        createdAt: json["createdAt"],
+        isCompleted: json["isCompleted"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "docID": docId,
-    "title": title,
-    "description": description,
-    "createdAt": createdAt,
-    "isCompleted": isCompleted,
-  };
+        "docID": docId,
+        "title": title,
+        "description": description,
+        "createdAt": DateTime.now().millisecondsSinceEpoch,
+        "isCompleted": false,
+      };
 }
