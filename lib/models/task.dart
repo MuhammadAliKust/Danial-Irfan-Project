@@ -4,10 +4,6 @@
 
 import 'dart:convert';
 
-TaskModel taskModelFromJson(String str) => TaskModel.fromJson(json.decode(str));
-
-String taskModelToJson(TaskModel data) => json.encode(data.toJson());
-
 class TaskModel {
   final String? docId;
   final String? title;
@@ -31,8 +27,8 @@ class TaskModel {
         isCompleted: json["isCompleted"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "docID": docId,
+  Map<String, dynamic> toJson(String documentID) => {
+        "docID": documentID,
         "title": title,
         "description": description,
         "createdAt": DateTime.now().millisecondsSinceEpoch,
