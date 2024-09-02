@@ -1,6 +1,7 @@
 import 'package:backend_di/models/task.dart';
 import 'package:backend_di/screens/create_task.dart';
 import 'package:backend_di/services/task.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,8 +16,13 @@ class GetAllTaskView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateTaskView()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CreateTaskView(
+                        isUpdateMode: false,
+                        model: TaskModel(),
+                      )));
         },
         child: const Icon(Icons.add),
       ),
@@ -31,14 +37,26 @@ class GetAllTaskView extends StatelessWidget {
                 return ListTile(
                   title: Text(taskList[i].title.toString()),
                   subtitle: Text(taskList[i].description.toString()),
-                  trailing: IconButton(
-                    onPressed: () async {
-                      try {
-                        await TaskServices()
-                            .deleteTask(taskList[i].docId.toString());
-                      } catch (e) {}
-                    },
-                    icon: Icon(Icons.delete),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CupertinoSwitch(
+                          value: taskList[i].isCompleted!,
+                          onChanged: (val) {
+                            TaskServices().markTaskAsComplete(
+                                taskList[i].docId.toString());
+                          }),
+                      IconButton(
+                        onPressed: () async {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CreateTaskView(
+                                      model: taskList[i], isUpdateMode: true)));
+                        },
+                        icon: Icon(Icons.edit),
+                      ),
+                    ],
                   ),
                 );
               });
