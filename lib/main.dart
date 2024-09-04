@@ -1,6 +1,8 @@
 import 'package:backend_di/screens/create_task.dart';
 import 'package:backend_di/screens/dashboard_view.dart';
 import 'package:backend_di/screens/get_all_task.dart';
+import 'package:backend_di/screens/login.dart';
+import 'package:backend_di/screens/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: DashboardView(),
+      home: Register(),
     );
   }
 }
